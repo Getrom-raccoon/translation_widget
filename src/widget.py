@@ -1,5 +1,6 @@
 from src.masks import get_mask_account, get_mask_card_number
 
+
 def mask_account_card(card_details: str) -> str:
     """функция обрабатывает информацию как о картах, так и о счетах"""
     mask_account = get_mask_account(card_details[-20:])
