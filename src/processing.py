@@ -1,4 +1,4 @@
-def filter_by_state(bill_details: dict, state: str = "EXECUTED") -> list:
+def filter_by_state(bill_details: dict, state: str = "EXECUTED") -> list or str:
     """
     Фильтрует список словарей по указанному состоянию операции.
 
@@ -9,7 +9,11 @@ def filter_by_state(bill_details: dict, state: str = "EXECUTED") -> list:
     Возвращает:
         list: Список элементов из bill_details, где значение ключа "state" соответствует указанному state.
     """
-    return [i for i in bill_details if i["state"] == state]
+    filter_bill =  [i for i in bill_details if i["state"] == state]
+    if filter_bill == []:
+        return f"нет данных"
+    else:
+        return filter_bill
 
 
 def sort_by_date(bill_details: dict, date_sort: bool = True) -> list:
@@ -25,4 +29,10 @@ def sort_by_date(bill_details: dict, date_sort: bool = True) -> list:
     Возвращает:
         list: Отсортированный список словарей с деталями операций.
     """
+    for details in bill_details:
+        if "date" not in details:
+            for i in details:
+                if "date" not in i:
+                    return f"некорректный ввод"
     return sorted(bill_details, key=lambda d: d["date"], reverse=date_sort)
+
