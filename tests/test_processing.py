@@ -90,10 +90,10 @@ def test_sort_by_date(bill_details, date_sort, expected_result):
 
 
 @pytest.mark.parametrize("bill_details, expected_result", test_identical_date)
-def test_sort_by_date(bill_details, expected_result):
+def test_date_same(bill_details, expected_result):
     assert sort_by_date(bill_details) == expected_result
 
 
 @pytest.mark.parametrize("bill_details, expected_result", test_unreal_date)
-def test_sort_by_date(bill_details, expected_result):
+def test_unreal_dates(bill_details, expected_result):
     assert sort_by_date(bill_details) == expected_result
