@@ -1,8 +1,26 @@
 def get_mask_card_number(card_number: str) -> str:
     """Функция принимает на вход номер карты и возвращает ее маску"""
+    # Проверяем, содержит ли строка хотя бы одну букву
+    if any(i.isalpha() for i in card_number):
+        return "номер карты должен состоять только из цифр"
+
+    # Проверяем длину строки
+    if len(card_number) != 16:
+        return "Не соответствующая длина карты (16 цифр)"
+
+    # Если все проверки пройдены, возвращаем маску
     return f"{card_number[0:4]} {card_number[4:6]}** **** {card_number[-4:]}"
 
 
-def get_mask_account(get_mask_account: str) -> str:
+def get_mask_account(account_number: str) -> str:
     """Функция принимает на вход номер счета и возвращает его маску"""
-    return f"**{get_mask_account[-4:]}"
+    # Проверяем, содержит ли строка хотя бы одну букву
+    if any(i.isalpha() for i in account_number):
+        return "номер счета должен состоять только из цифр"
+
+    # Проверяем длину строки
+    if len(account_number) != 20:
+        return "Не соответствующая длина счета (20 цифр)"
+
+    # Если все проверки пройдены, возвращаем маску
+    return f"**{account_number[-4:]}"

@@ -7,12 +7,25 @@ def mask_account_card(card_details: str) -> str:
     mask_card = get_mask_card_number(card_details[-16:])
 
     if card_details[0:4] == "Счет":
-        return f"{card_details[0:5]}{mask_account}"
-    else:
+        if any(i.isalpha() for i in mask_account):
+            return "номер счета должен состоять только из цифр"
+        else:
+            return f"{card_details[0:5]}{mask_account}"
+    elif any(i.isdigit() for i in mask_card):
         return f"{card_details[:-16]}{mask_card}"
+    else:
+        return "номер карты должен состоять только из цифр"
 
 
 def get_date(unformatted_date: str) -> str:
     """возвращает строку с датой в формате 'ДД.ММ.ГГГГ'"""
-    return (f"{unformatted_date[8:10]}{unformatted_date[4:8]}{unformatted_date[0:4]}"
-            .replace("-", "."))
+    formatted_date = str((f"{unformatted_date[8:10]}{unformatted_date[4:8]}{unformatted_date[0:4]}".replace("-", ".")))
+
+    if unformatted_date == "":
+        return "Отсутствует дата"
+    elif len(unformatted_date) != 26:
+        return "Некорректное значение"
+    elif int(formatted_date[0:2]) > 12 or int(formatted_date[3:5]) > 31 or int(formatted_date[6:]) > 2100:
+        return "Некорректная дата"
+    else:
+        return formatted_date
