@@ -12,3 +12,13 @@ def filter_by_currency(transactions, currency):
         ):
             if transaction["operationAmount"]["currency"]["name"] == currency:
                 yield transaction
+
+
+def transaction_descriptions(transactions):
+    """
+    Генератор, который принимает список словарей с транзакциями и возвращает описание каждой операции по очереди.
+    :param transactions: Список словарей с транзакциями.
+    :return: описание каждой операции по очереди.
+    """
+    for spending in transactions:
+        yield spending["description"]
