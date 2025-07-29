@@ -22,3 +22,19 @@ def transaction_descriptions(transactions):
     """
     for spending in transactions:
         yield spending["description"]
+
+
+def card_number_generator(x,y):
+    """
+    Генератор выдает номера банковских карт в формате XXXX XXXX XXXX XXXX
+    :param x: минимальное значение диапозона
+    :param y: максимальное значение диапозона
+    :return: сгенерированный номер карты в формате строки
+    """
+    if x > y:
+        raise ValueError("Минимальное значение диапозона не может быть больше максимального")
+
+    for number in range(x,y + 1):
+        number_str = str(10**16 + number)[-16:]
+        formatted = " ".join([number_str[i:i+4] for i in range(0, 16, 4)])
+        yield formatted
