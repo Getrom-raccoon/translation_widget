@@ -7,8 +7,9 @@ def filter_by_currency(transactions, currency):
     """
     for transaction in transactions:
         if (
-                "operationAmount" in transaction and "currency" in transaction["operationAmount"] and "name" in
-                transaction["operationAmount"]["currency"]
+            "operationAmount" in transaction
+            and "currency" in transaction["operationAmount"]
+            and "name" in transaction["operationAmount"]["currency"]
         ):
             if transaction["operationAmount"]["currency"]["name"] == currency:
                 yield transaction
@@ -20,11 +21,12 @@ def transaction_descriptions(transactions):
     :param transactions: Список словарей с транзакциями.
     :return: описание каждой операции по очереди.
     """
-    for spending in transactions:
-        yield spending["description"]
+    for transaction in transactions:
+        if "description" in transaction:
+            yield transaction["description"]
 
 
-def card_number_generator(x,y):
+def card_number_generator(x, y):
     """
     Генератор выдает номера банковских карт в формате XXXX XXXX XXXX XXXX
     :param x: минимальное значение диапозона
@@ -34,7 +36,7 @@ def card_number_generator(x,y):
     if x > y:
         raise ValueError("Минимальное значение диапозона не может быть больше максимального")
 
-    for number in range(x,y + 1):
+    for number in range(x, y + 1):
         number_str = str(10**16 + number)[-16:]
-        formatted = " ".join([number_str[i:i+4] for i in range(0, 16, 4)])
+        formatted = " ".join([number_str[i : i + 4] for i in range(0, 16, 4)])
         yield formatted
