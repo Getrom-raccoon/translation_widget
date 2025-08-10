@@ -9,6 +9,7 @@ def log(filename=None):
     :return: Декоратор который оборачивает функцию и добавляет логирование
     """
     def decorator(func):
+        @wraps(func)
         def wrapper(*args, **kwargs):
             """
             Обёртка - добавляющая логирование для функции
@@ -21,6 +22,7 @@ def log(filename=None):
             start_message = f"{func_name} started"
 
             if filename:
+                logging.getLogger().handlers.clear()
                 logging.basicConfig(
                     filename=filename,
                     level=logging.INFO,
@@ -43,16 +45,19 @@ def log(filename=None):
                 return result
             except Exception as e:
                 error_message = (
-                    f"{func_name} error: {type(e).__name__}."
+                    f"{func_name} error: {type(e).__name__}. "
                     f"Inputs: {args}, {kwargs}"
                 )
 
                 if filename:
                     logger.error(error_message)
+                    for h in logger.handlers:
+                        h.close()
+                        logger.removeHandler(h)
                 else:
                     print(error_message)
 
-                    raise
+                raise
 
         return wrapper
 
