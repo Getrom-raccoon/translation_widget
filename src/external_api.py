@@ -29,7 +29,7 @@ def conversion_of_amount(transaction):
         return "Ошибка: некорректная сумма"
 
     if currency_code.upper() == "RUB":
-        return f"{amount_float} RUB"
+        return amount_float
 
     url = f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={currency_code}&amount={amount_float}"
     headers = {"apikey": API_KEY}
@@ -38,6 +38,6 @@ def conversion_of_amount(transaction):
     if conversion.status_code == 200:
         data = conversion.json()
         converted_amount = data.get("result")
-        return f"{amount_float} {currency_code} = {round(converted_amount, 2)} RUB"
+        return float(converted_amount)
     else:
         return f"Ошибка: {conversion.status_code}, {conversion.text}"

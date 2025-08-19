@@ -34,7 +34,7 @@ TRANSACTION_INVALID = {
 def test_conversion_of_amount_rub(mock_get):
     """сумма в RUB не конвертируется."""
     result = conversion_of_amount(TRANSACTION_RUB)
-    assert result == "31957.58 RUB"
+    assert result == 31957.58
 
 
 @patch("src.external_api.requests.get")
@@ -46,7 +46,7 @@ def test_conversion_of_amount_usd_success(mock_get):
     mock_get.return_value = mock_response
 
     result = conversion_of_amount(TRANSACTION_USD)
-    assert result == "100.0 USD = 8500.0 RUB"
+    assert result == 8500.0
 
 
 @patch("src.external_api.requests.get")
@@ -58,7 +58,7 @@ def test_conversion_of_amount_eur_success(mock_get):
     mock_get.return_value = mock_response
 
     result = conversion_of_amount(TRANSACTION_EUR)
-    assert result == "50.0 EUR = 7500.0 RUB"
+    assert result == 7500.0
 
 
 @patch("src.external_api.requests.get")
