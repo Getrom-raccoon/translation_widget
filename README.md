@@ -74,3 +74,15 @@ card_number_generator(x, y)
 ```commandline
 def log(filename=None)
 ```
+
+### Конвертация валюты
+1. **Добавлен новый модуль utils в котором реализована функция которая конвертирует operations.json в python объект**
+```commandline
+def financial_transaction(path_to_file)
+```
+2. **В модуле external_api реализована функция которая принимает на вход транзакцию и возвращает сумму транзакции в рублях, тип данных — float**
+
+```commandline
+def conversion_of_amount(transaction)
+```
+
