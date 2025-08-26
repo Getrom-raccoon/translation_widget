@@ -21,7 +21,7 @@ def financial_transaction(path_to_file):
     file_path = Path(path_to_file)
     try:
         if not file_path.exists():
-            logger.warning("вернулся пустой список, так как отсутствует файл")
+            logger.error("вернулся пустой список, так как отсутствует файл")
             return []
         with open(file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -32,5 +32,5 @@ def financial_transaction(path_to_file):
                 logger.warning("вернулся пустой список, так как файл пустой")
                 return []
     except (json.JSONDecodeError, PermissionError):
-        logger.warning("некорректный формат файла")
+        logger.error("некорректный формат файла")
         return []
