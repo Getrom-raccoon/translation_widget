@@ -1,33 +1,13 @@
 from unittest.mock import patch, Mock
 from src.external_api import conversion_of_amount
 
-TRANSACTION_RUB = {
-    "operationAmount": {
-        "amount": "31957.58",
-        "currency": {"code": "RUB"}
-    }
-}
+TRANSACTION_RUB = {"operationAmount": {"amount": "31957.58", "currency": {"code": "RUB"}}}
 
-TRANSACTION_USD = {
-    "operationAmount": {
-        "amount": "100.00",
-        "currency": {"code": "USD"}
-    }
-}
+TRANSACTION_USD = {"operationAmount": {"amount": "100.00", "currency": {"code": "USD"}}}
 
-TRANSACTION_EUR = {
-    "operationAmount": {
-        "amount": "50.00",
-        "currency": {"code": "EUR"}
-    }
-}
+TRANSACTION_EUR = {"operationAmount": {"amount": "50.00", "currency": {"code": "EUR"}}}
 
-TRANSACTION_INVALID = {
-    "operationAmount": {
-        "amount": "",
-        "currency": {"code": "RUB"}
-    }
-}
+TRANSACTION_INVALID = {"operationAmount": {"amount": "", "currency": {"code": "RUB"}}}
 
 
 @patch("src.external_api.requests.get")
@@ -83,11 +63,6 @@ def test_conversion_of_amount_invalid_transaction(mock_get):
 @patch("src.external_api.requests.get")
 def test_conversion_of_amount_invalid_amount(mock_get):
     """некорректное значение суммы."""
-    invalid_transaction = {
-        "operationAmount": {
-            "amount": "abc",
-            "currency": {"code": "RUB"}
-        }
-    }
+    invalid_transaction = {"operationAmount": {"amount": "abc", "currency": {"code": "RUB"}}}
     result = conversion_of_amount(invalid_transaction)
     assert "Ошибка: некорректная сумма" in result

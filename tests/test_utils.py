@@ -8,7 +8,7 @@ TEST_FILE_PATH = "data/operations.json"
 
 def create_test_json_file(content, filename="test_operations.json"):
     """Создаёт временный JSON-файл с заданным содержимым."""
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(filename, "w", encoding="utf-8") as f:
         f.write(json.dumps(content))
     return filename
 
@@ -35,13 +35,10 @@ def test_financial_transaction_valid_file(setup_teardown):
             "id": 1,
             "state": "EXECUTED",
             "date": "2023-01-01",
-            "operationAmount": {
-                "amount": "100.00",
-                "currency": {"name": "руб.", "code": "RUB"}
-            },
+            "operationAmount": {"amount": "100.00", "currency": {"name": "руб.", "code": "RUB"}},
             "description": "Покупка",
             "from": "Счет 123",
-            "to": "Счет 456"
+            "to": "Счет 456",
         }
     ]
     filename = create_test_json_file(test_data, "test_operations.json")
@@ -78,7 +75,7 @@ def test_financial_transaction_nonexistent_file():
 def test_financial_transaction_corrupted_json():
     """файл с некорректным JSON."""
     filename = "test_invalid.json"
-    with open(filename, 'w') as f:
+    with open(filename, "w") as f:
         f.write("invalid json content")
     result = financial_transaction(filename)
     assert result == []
