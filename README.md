@@ -85,4 +85,9 @@ def financial_transaction(path_to_file)
 ```commandline
 def conversion_of_amount(transaction)
 ```
+### Конвертация валюты из CSV и EXCEL
 
+ **Добавлен новый модуль read_transactoins который считывает финансовые операции из CSV и EXCEL-файлов и возвращает список словарей.**
+```commandline
+def read_csv_transactions(file_patch)
+def read_excel_transactions(file_patch)
