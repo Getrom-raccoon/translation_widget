@@ -8,7 +8,8 @@ def read_csv_transactions(file_patch):
     :return: список словарей
     """
     df = pd.read_csv(file_patch)
-    return df.to_dict(orient='records')
+    return df.to_dict(orient="records")
+
 
 def read_excel_transactions(file_patch):
     """
@@ -17,4 +18,4 @@ def read_excel_transactions(file_patch):
     :return: список словарей
     """
     df = pd.read_excel(file_patch)
-    return df.to_dict(orient='records')
+    return df.to_dict(orient="records")

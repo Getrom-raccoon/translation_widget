@@ -1,5 +1,4 @@
 from unittest.mock import Mock, patch
-import pytest
 from src.read_transactions import read_csv_transactions, read_excel_transactions
 
 
