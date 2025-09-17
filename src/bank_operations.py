@@ -20,19 +20,3 @@ def process_bank_operations(data, categories):
                     result[category] += 1
 
     return result
-
-# Данные
-bank_operations = [
-    {'id': 1, 'description': 'Покупка в магазине "Мир"', 'amount': 500},
-    {'id': 2, 'description': 'Перевод на карту друга', 'amount': 1000},
-    {'id': 3, 'description': 'Оплата интернета', 'amount': 300},
-    {'id': 4, 'description': 'Снятие наличных в банкомате', 'amount': 200},
-    {'id': 5, 'description': 'Покупка в аптеке', 'amount': 150}
-]
-
-# Список категорий
-categories = ["Покупка", "Перевод", "Снятие"]
-
-# Вызов функции
-result = process_bank_operations(bank_operations, categories)
-print(result)
