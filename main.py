@@ -1,14 +1,15 @@
-import re
-from src.utils import financial_transaction
-from src.read_transactions import read_csv_transactions, read_excel_transactions
-from src.processing import filter_by_state, sort_by_date
-from src.generators import filter_by_currency
 from src.bank_search import process_bank_search
+from src.generators import filter_by_currency
+from src.processing import filter_by_state, sort_by_date
+from src.read_transactions import read_csv_transactions, read_excel_transactions
+from src.utils import financial_transaction
 from src.widget import get_date, mask_account_card
+
 
 def norm_input(text):
     """Приводим ввод пользователей к нижнему регистру"""
     return text.lower()
+
 
 def main():
     print("Привет! Добро пожаловать в программу работы с банковскими транзакциями.")
@@ -50,7 +51,6 @@ def main():
         else:
             print("Неверный выбор. Пожалуйста, введите 1, 2 или 3.")
 
-
     valid_states = {"executed", "canceled", "pending"}
     while True:
         print("Введите статус, по которому необходимо выполнить фильтрацию.")
@@ -74,19 +74,16 @@ def main():
         reverse = "убыв" in order_choice
         transactions = sort_by_date(transactions, reverse=reverse)
 
-
     print("Выводить только рублевые транзакции? Да/Нет")
     rub_choice = norm_input(input("Пользователь: "))
     if rub_choice in ("да", "yes", "y"):
         transactions = list(filter_by_currency(transactions, "руб."))
-
 
     print("Отфильтровать список транзакций по определенному слову в описании? Да/Нет")
     desc_choice = norm_input(input("Пользователь: "))
     if desc_choice in ("да", "yes", "y"):
         keyword = input("Введите слово для фильтрации: ").strip()
         transactions = process_bank_search(transactions, keyword)
-
 
     print("Распечатываю итоговый список транзакций...")
     print()
@@ -115,6 +112,7 @@ def main():
                 print(masked_to)
             print(f"Сумма: {amount} {currency}")
             print()
+
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,7 @@
-import logging
 import pytest
 import os
 from src.decorators import log
+
 
 @pytest.fixture(autouse=True)
 def clear_log_file():
@@ -16,6 +16,7 @@ def clear_log_file():
 
 def test_successful_execution(capsys):
     """Тест успешного выполнения функции с выводом в консоль."""
+
     @log()
     def add(x, y):
         return x + y
@@ -26,6 +27,7 @@ def test_successful_execution(capsys):
     assert "add started" in captured.out
     assert "add ок" in captured.out
 
+
 def test_exception_handling(capsys):
     """Тест обработки исключения."""
 
@@ -33,15 +35,17 @@ def test_exception_handling(capsys):
     def faulty_function():
         raise ValueError("Something went wrong")
 
-    with pytest.raises(ValueError) as exc_info:
+    with pytest.raises(ValueError) as _:
         faulty_function()
 
     captured = capsys.readouterr()
     assert "faulty_function started" in captured.out
     assert "faulty_function error: ValueError. Inputs: (), {}" in captured.out
 
+
 def test_logging_to_file():
     """Тест логирования в файл."""
+
     @log(filename="mylog.txt")
     def multiply(x, y):
         return x * y
@@ -53,8 +57,10 @@ def test_logging_to_file():
         assert "multiply started\n" in logs
         assert "multiply ок\n" in logs
 
+
 def test_logging_with_exception_to_file():
     """Тест логирования ошибки в файл."""
+
     @log(filename="error_log.txt")
     def faulty_function():
         raise ValueError("Something went wrong")
@@ -66,6 +72,7 @@ def test_logging_with_exception_to_file():
         logs = file.readlines()
         assert "faulty_function started\n" in logs
         assert "faulty_function error: ValueError. Inputs: (), {}\n" in logs
+
 
 def test_decorator_preserves_function_metadata():
     """Тест сохранения метаданных функции."""
