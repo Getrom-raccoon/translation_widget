@@ -28,7 +28,7 @@ test_filter_state = [
             {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
         ],
     ),
-    ("UNREAL", "нет данных"),
+    ("UNREAL", []),
 ]
 
 
@@ -66,7 +66,7 @@ test_identical_date = [
     )
 ]
 
-test_unreal_date = [("note_correct_found", "некорректный ввод")]
+test_unreal_date = [("note_correct_found", [])]
 
 
 @pytest.mark.parametrize("state, expected_result", test_filter_state)
